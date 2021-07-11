@@ -97,6 +97,7 @@ const typeDefs = gql`
     name: String!
     id: ID!
     born: Int
+    bookCount: Int
   }
 
   type Query {
@@ -113,6 +114,17 @@ const resolvers = {
     authorCount: () => authors.length,
     allBooks: () => books, 
     allAuthors: () => authors
+  }, 
+  Author: {
+    bookCount: (root) => {
+      let counter = 0;
+      books.forEach(book => {
+        if (book.author === root.name) {
+          counter++;
+        }
+      })
+      return counter; 
+    }
   }
 }
 
