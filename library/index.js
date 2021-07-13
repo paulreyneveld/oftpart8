@@ -98,6 +98,7 @@ const typeDefs = gql`
     id: ID!
     born: Int
     bookCount: Int
+    title: String
   }
 
   type Query {
@@ -122,8 +123,13 @@ const resolvers = {
         if (book.author === root.name) {
           counter++;
         }
-      })
+      });
       return counter; 
+    },
+    title: (root, args) => {
+      if (args.name) {
+        return books.find(book => book.author === args.name);
+      }
     }
   }
 }
