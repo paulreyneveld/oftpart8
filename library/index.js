@@ -104,7 +104,7 @@ const typeDefs = gql`
     bookCount: Int!
     authorCount: Int!
     allBooks: [Book!]!
-    allAuthors: [Author!]!
+    allAuthors(name: String): [Author!]
   }
 `
 
