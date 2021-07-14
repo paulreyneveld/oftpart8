@@ -99,11 +99,16 @@ const typeDefs = gql`
     bookCount: Int
   }
 
+  type Test {
+    item: Int
+  }
+
   type Query {
     bookCount: Int!
     authorCount: Int!
     allBooks(name: String): [Book]
     allAuthors: [Author!]
+    test(value: String): Test
   }
 `
 
@@ -112,7 +117,8 @@ const resolvers = {
     bookCount: () => books.length,
     authorCount: () => authors.length,
     allBooks: () => books, 
-    allAuthors: () => authors
+    allAuthors: () => authors,
+    test: (root, args) => { console.log(args); return 21;}
   }, 
   Author: {
     bookCount: (root) => {
@@ -134,6 +140,12 @@ const resolvers = {
         return 'not cheese';
       }
       return 'cheese';
+    }
+  },
+  Test: {
+    item: (_, args) => {
+      console.log(args.value);
+      return 21;
     }
   }
 }
