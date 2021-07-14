@@ -85,7 +85,7 @@ let books = [
 
 const typeDefs = gql`
   type Book {
-    title: String!
+    title: String
     published: Int!
     author: String!
     id: ID!
@@ -99,16 +99,11 @@ const typeDefs = gql`
     bookCount: Int
   }
 
-  type Test {
-    item(value: String): Int
-  }
-
   type Query {
     bookCount: Int!
     authorCount: Int!
     allBooks(name: String): [Book]
     allAuthors: [Author!]
-    test: Test
   }
 `
 
@@ -116,9 +111,13 @@ const resolvers = {
   Query: {
     bookCount: () => books.length,
     authorCount: () => authors.length,
-    allBooks: () => books, 
+    allBooks: (_, args) => {
+      if (args.name) {  
+        return books.filter(book => book.author === args.name);
+      }
+      return books;
+    }, 
     allAuthors: () => authors,
-    test: (root, args) => { console.log(args); return 12; }
   }, 
   Author: {
     bookCount: (root) => {
@@ -129,23 +128,6 @@ const resolvers = {
         }
       });
       return counter; 
-    }
-  },
-  Book: {
-    title: (_, args) => {
-      console.log(args);
-      // let test = books.filter(book => book.author === args.name);
-      // console.log(test);
-      if (args) {
-        return 'not cheese';
-      }
-      return 'cheese';
-    }
-  },
-  Test: {
-    item: () => {
-      console.log('food');
-      return 21;
     }
   }
 }
