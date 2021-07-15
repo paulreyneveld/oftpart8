@@ -117,7 +117,15 @@ const resolvers = {
       }
       console.log(args.genre);
       if (args.genre) {
-        return books.filter(book => book.genres === args.genre);
+        let genreQueryResponse = []
+        books.forEach(book => {
+          for (let i = 0; i < book.genres.length; i++) {
+            if (book.genres[i] === args.genre) {
+              genreQueryResponse.push(book);
+            }
+          }
+        });
+        return genreQueryResponse;
       }
       return books;
     }, 
