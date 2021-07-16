@@ -150,6 +150,13 @@ const resolvers = {
       });
       return counter; 
     }
+  },
+  Mutation: {
+    addBook: (root, args) {
+      const book = { ...args };
+      books = books.concat(book);
+      return book;
+    }
   }
 }
 
