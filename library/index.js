@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, gql } = require('apollo-server');
+const { v1: uuid} = require('uuid');
 
 let authors = [
   {
@@ -156,9 +157,8 @@ const resolvers = {
       const book = { ...args };
       books = books.concat(book);
       let doesAuthorExist = authors.filter(author => author.name === args.author);
-      console.log('length', doesAuthorExist.length);
       if (doesAuthorExist.length === 0) {
-        authors.concat({ author: `${args.author}` })
+        authors = authors.concat({ name: `${args.author}`, id: uuid() });
       }
       return book;
     }
