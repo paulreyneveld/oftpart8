@@ -105,6 +105,15 @@ const typeDefs = gql`
     allBooks(name: String, genre: String): [Book]
     allAuthors: [Author!]
   }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int!
+      genres: [String!]
+    )
+  }
 `
 
 const resolvers = {
