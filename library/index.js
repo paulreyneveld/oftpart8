@@ -112,7 +112,7 @@ const typeDefs = gql`
       author: String!
       published: Int!
       genres: [String!]
-    )
+    ): Book
   }
 `
 
