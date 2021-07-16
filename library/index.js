@@ -155,6 +155,11 @@ const resolvers = {
     addBook: (root, args) => {
       const book = { ...args };
       books = books.concat(book);
+      let doesAuthorExist = authors.filter(author => author.name === args.author);
+      console.log('length', doesAuthorExist.length);
+      if (doesAuthorExist.length === 0) {
+        authors.concat({ author: `${args.author}` })
+      }
       return book;
     }
   }
