@@ -152,7 +152,7 @@ const resolvers = {
     }
   },
   Mutation: {
-    addBook: (root, args) {
+    addBook: (root, args) => {
       const book = { ...args };
       books = books.concat(book);
       return book;
