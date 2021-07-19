@@ -115,6 +115,13 @@ const typeDefs = gql`
       genres: [String!]
     ): Book
   }
+
+  type Mutation {
+    editAuthor(
+      name: String
+      born: Int
+    ): Author
+  }
 `
 
 const resolvers = {
@@ -161,6 +168,9 @@ const resolvers = {
         authors = authors.concat({ name: `${args.author}`, id: uuid() });
       }
       return book;
+    },
+    editAuthor: (root, args) => {
+      console.log(args);
     }
   }
 }
