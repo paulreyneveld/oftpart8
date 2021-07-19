@@ -113,10 +113,7 @@ const typeDefs = gql`
       author: String!
       published: Int!
       genres: [String!]
-    ): Book
-  }
-
-  type Mutation {
+    ): Book,
     editAuthor(
       name: String
       born: Int
