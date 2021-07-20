@@ -167,7 +167,8 @@ const resolvers = {
       return book;
     },
     editAuthor: (root, args) => {
-      console.log(args);
+      // console.log(args);
+      const author = authors.filter(author => author.name === args.name);
     }
   }
 }
