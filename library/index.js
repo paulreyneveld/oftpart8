@@ -168,11 +168,14 @@ const resolvers = {
     },
     editAuthor: (root, args) => {
       const author = authors.find(author => author.name === args.name);
-      author.born = args.setBornTo
-      const soughtAfterIndex = authors.findIndex(a => a.id === author.id);
-      console.log(soughtAfterIndex);
-      authors[soughtAfterIndex] = author;
-      return author;
+      if (author) {
+        author.born = args.setBornTo
+        const soughtAfterIndex = authors.findIndex(a => a.id === author.id);
+        console.log(soughtAfterIndex);
+        authors[soughtAfterIndex] = author;
+        return author;
+      }
+      return null;
     }
   }
 }
