@@ -168,7 +168,11 @@ const resolvers = {
     },
     editAuthor: (root, args) => {
       // console.log(args);
-      const author = authors.filter(author => author.name === args.name);
+      const author = authors.find(author => author.name === args.name);
+      console.log(author);
+      author.setBornTo = args.setBornTo
+      console.log(author);
+
     }
   }
 }
