@@ -167,12 +167,8 @@ const resolvers = {
       return book;
     },
     editAuthor: (root, args) => {
-      // console.log(args);
       const author = authors.find(author => author.name === args.name);
-      console.log(author);
       author.setBornTo = args.setBornTo
-      console.log(author);
-
     }
   }
 }
