@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 
 const Authors = (props) => {
 
-  const [name, setName] = useState()
-  const [born, setBorn] = useState()
+  const [name, setName] = useState('')
+  const [born, setBorn] = useState('')
 
   if (!props.show) {
     return null
@@ -15,6 +15,8 @@ const Authors = (props) => {
   const submit = (event) => {
     event.preventDefault()
     console.log('submit')
+    setName('')
+    setBorn('')
   }
 
   return (
@@ -43,13 +45,20 @@ const Authors = (props) => {
       <h2>Set birthyear</h2>
       <form onSubmit={submit}>
         <div>
-          title
+          name
           <input
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
         </div>
-        <button type='submit'>create book</button>
+        <div>
+          born
+          <input
+            value={born}
+            onChange={({ target }) => setBorn(target.value)}
+          />
+        </div>
+        <button type='submit'>update author</button>
       </form>
     </div>
   )
