@@ -42,6 +42,7 @@ mutation editAuthor($name: String, $born: Int) {
         name: $name,
         setBornTo: $born
     ) {
+    id
     }
 }
 `
