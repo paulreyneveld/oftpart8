@@ -1,10 +1,14 @@
   
 import React, { useState } from 'react'
+import { UPDATE_AUTHOR } from '../queries'
+import { useMutation } from '@apollo/client'
 
 const Authors = (props) => {
 
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
+
+  const [ updateBorn ] = useMutation(UPDATE_AUTHOR)
 
   if (!props.show) {
     return null
@@ -15,6 +19,7 @@ const Authors = (props) => {
   const submit = (event) => {
     event.preventDefault()
     console.log('submit')
+    updateBorn({ variables: { name, born } })
     setName('')
     setBorn('')
   }

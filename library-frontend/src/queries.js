@@ -37,13 +37,11 @@ mutation newBook($title: String!, $author: String!, $published: Int!, $genres: [
 `
 
 export const UPDATE_AUTHOR = gql`
-mutation updateAuthor($name: String, $born: Int) {
-    updateAuthor(
+mutation editAuthor($name: String, $born: Int) {
+    editAuthor(
         name: $name,
-        born: $born
+        setBornTo: $born
     ) {
-        author,
-        setBornTo
     }
 }
 `
