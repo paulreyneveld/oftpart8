@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { ApolloServer, gql } = require('apollo-server');
 const mongoose = require('mongoose')
 const Author = require('./models/author')
