@@ -145,7 +145,6 @@ const resolvers = {
       if (args.name) {  
         return books.filter(book => book.author === args.name);
       }
-      console.log(args.genre);
       if (args.genre) {
         let genreQueryResponse = []
         books.forEach(book => {
@@ -159,7 +158,9 @@ const resolvers = {
       }
       return books;
     }, 
-    allAuthors: () => authors,
+    allAuthors: () => { 
+      return Author.find({}) 
+    },
   }, 
   Author: {
     bookCount: (root) => {
