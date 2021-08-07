@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Author = require('./models/author')
 const Book = require('./models/book')
@@ -183,7 +183,15 @@ const resolvers = {
     //   return book;
     addBook: (root, args) => {
       const book = new Book({ ...args })
-      return book.save()
+      try {
+        book.save()
+      }
+      catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+      return book
     },
     editAuthor: (root, args) => {
       const author = authors.find(author => author.name === args.name);
