@@ -173,14 +173,17 @@ const resolvers = {
     }
   },
   Mutation: {
+    // addBook: (root, args) => {
+    //   const book = { ...args };
+    //   books = books.concat(book);
+    //   let doesAuthorExist = authors.filter(author => author.name === args.author);
+    //   if (doesAuthorExist.length === 0) {
+    //     authors = authors.concat({ name: `${args.author}`, id: uuid() });
+    //   }
+    //   return book;
     addBook: (root, args) => {
-      const book = { ...args };
-      books = books.concat(book);
-      let doesAuthorExist = authors.filter(author => author.name === args.author);
-      if (doesAuthorExist.length === 0) {
-        authors = authors.concat({ name: `${args.author}`, id: uuid() });
-      }
-      return book;
+      const book = new Book({ ...args })
+      return book.save()
     },
     editAuthor: (root, args) => {
       const author = authors.find(author => author.name === args.name);
