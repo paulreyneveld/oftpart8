@@ -139,7 +139,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    bookCount: () => books.length,
+    bookCount: () => Book.collection.countDocuments(),
     authorCount: () => authors.length,
     allBooks: (_, args) => {
       if (args.name) {  
