@@ -158,7 +158,10 @@ const resolvers = {
       }
       return books;
     }, 
-    allAuthors: () => { 
+    allAuthors: (root, args) => { 
+      console.log('Testing')
+      let author = Author.find({})
+      console.log(author)
       return Author.find({}) 
     },
   }, 
