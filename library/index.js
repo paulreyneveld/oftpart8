@@ -142,21 +142,22 @@ const resolvers = {
     bookCount: () => Book.collection.countDocuments(),
     authorCount: () => Author.collection.countDocuments(),
     allBooks: (_, args) => {
-      if (args.name) {  
-        return books.filter(book => book.author === args.name);
-      }
-      if (args.genre) {
-        let genreQueryResponse = []
-        books.forEach(book => {
-          for (let i = 0; i < book.genres.length; i++) {
-            if (book.genres[i] === args.genre) {
-              genreQueryResponse.push(book);
-            }
-          }
-        });
-        return genreQueryResponse;
-      }
-      return books;
+      // if (args.name) {  
+      //   return books.filter(book => book.author === args.name);
+      // }
+      // if (args.genre) {
+      //   let genreQueryResponse = []
+      //   books.forEach(book => {
+      //     for (let i = 0; i < book.genres.length; i++) {
+      //       if (book.genres[i] === args.genre) {
+      //         genreQueryResponse.push(book);
+      //       }
+      //     }
+      //   });
+      //   return genreQueryResponse;
+      // }
+      // return books;
+      return Book.find({})
     }, 
     allAuthors: (root, args) => { 
       console.log('Testing')
