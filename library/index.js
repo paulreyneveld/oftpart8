@@ -160,9 +160,6 @@ const resolvers = {
       return Book.find({})
     }, 
     allAuthors: (root, args) => { 
-      console.log('Testing')
-      let author = Author.find({})
-      console.log(author)
       return Author.find({}) 
     },
   }, 
