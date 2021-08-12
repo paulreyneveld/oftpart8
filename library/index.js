@@ -133,7 +133,11 @@ const typeDefs = gql`
     editAuthor(
       name: String
       setBornTo: Int
-    ): Author
+    ): Author,
+    editBook(
+      title: String
+      author: String
+    ): Book 
   }
 `
 
@@ -142,21 +146,6 @@ const resolvers = {
     bookCount: () => Book.collection.countDocuments(),
     authorCount: () => Author.collection.countDocuments(),
     allBooks: (_, args) => {
-      // if (args.name) {  
-      //   return books.filter(book => book.author === args.name);
-      // }
-      // if (args.genre) {
-      //   let genreQueryResponse = []
-      //   books.forEach(book => {
-      //     for (let i = 0; i < book.genres.length; i++) {
-      //       if (book.genres[i] === args.genre) {
-      //         genreQueryResponse.push(book);
-      //       }
-      //     }
-      //   });
-      //   return genreQueryResponse;
-      // }
-      // return books;
       return Book.find({})
     }, 
     allAuthors: (root, args) => { 
@@ -188,15 +177,26 @@ const resolvers = {
       return book
     },
     editAuthor: (root, args) => {
-      const author = authors.find(author => author.name === args.name);
-      if (author) {
-        author.born = args.setBornTo
-        const soughtAfterIndex = authors.findIndex(a => a.id === author.id);
-        console.log(soughtAfterIndex);
-        authors[soughtAfterIndex] = author;
-        return author;
-      }
-      return null;
+      // const author = authors.find(author => author.name === args.name);
+      // if (author) {
+      //   author.born = args.setBornTo
+      //   const soughtAfterIndex = authors.findIndex(a => a.id === author.id);
+      //   console.log(soughtAfterIndex);
+      //   authors[soughtAfterIndex] = author;
+      //   return author;
+      // }
+      // return null;
+      // Find the author, with the saved version of the author, update the info, resave the author to the db. 
+
+    },
+    editBook: async (root, args) => {
+      const books = await Book.find({})
+      const book = books.find(book => book.title === args.title)
+      console.log(book)
+      book.author = args.author
+      console.log(book)
+      return Book.findByIdAndUpdate(book._id, { author: args.author })
+
     }
   }
 }
